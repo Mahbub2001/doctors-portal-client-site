@@ -6,11 +6,11 @@ import chair from '../../../assets/images/chair.png'
 const Banner = () => {
   return (
     <div className="hero relative">
-      <img className="absolute" src={image} alt="" />
+      <img className="absolute -top-30" src={image} alt="" />
       <div className="hero-content flex-col lg:flex-row-reverse">
         <img
           src={chair}
-          className="rounded-lg w-1/2 shadow-2xl"
+          className="rounded-lg lg:w-1/2 shadow-2xl"
           alt=""
         />
         <div>
