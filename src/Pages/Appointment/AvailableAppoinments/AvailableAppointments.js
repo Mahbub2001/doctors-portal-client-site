@@ -16,7 +16,7 @@ const AvailableAppointments = ({ selectedDate }) => {
       <p className="text-center text-secondary font-bold">
         Available Appointments On {format(selectedDate, "PP")}{" "}
       </p>
-      <div className="grid lg:grid-cols-3 gap-6 grid-cols-1 md:grid-cols-2">
+      <div className="grid lg:grid-cols-3 gap-6 grid-cols-1 md:grid-cols-2 items-center place-items-center">
         {appointmentOptions.map((option) => (
           <AppointmentOption
             key={option._id}
@@ -25,7 +25,13 @@ const AvailableAppointments = ({ selectedDate }) => {
           ></AppointmentOption>
         ))}
       </div>
-      {treatment && <BookingModal selectedDate={selectedDate} treatment={treatment}></BookingModal>}
+      {treatment && (
+        <BookingModal
+          selectedDate={selectedDate}
+          treatment={treatment}
+          setTreatment={setTreatment}
+        ></BookingModal>
+      )}
     </section>
   );
 };

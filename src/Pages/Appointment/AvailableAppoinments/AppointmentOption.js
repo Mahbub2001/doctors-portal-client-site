@@ -4,8 +4,8 @@ const AppointmentOption = ({ appointmentOption,setTreatment }) => {
   const { name, slots } = appointmentOption;
 
   return (
-    <div className="card shadow-xl">
-      <div className="card-body max-w-[420px] text-center mt-10">
+    <div className="card md:w-full sm:w-96  shadow-xl ">
+      <div className="card-body lg:max-w-[420px] text-center mt-10">
         <h2 className="text-2xl font-bold text-secondary text-center">
           {name}
         </h2>
@@ -15,6 +15,7 @@ const AppointmentOption = ({ appointmentOption,setTreatment }) => {
         </p>
         <div className="card-actions justify-center">
           <label 
+          disabled={slots.length === 0}
           htmlFor="booking-modal" 
           className="btn btn-primary text-white"
           onClick={()=>setTreatment(appointmentOption)}
