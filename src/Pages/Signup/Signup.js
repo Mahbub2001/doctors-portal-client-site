@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 const Signup = () => {
   const {
@@ -9,8 +11,29 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
+  const { createUser, updateUser } = useContext(AuthContext);
+  const [signupError, setSignupError] = useState("");
+
   const handleSignUp = (data) => {
-    console.log(data);
+    // console.log(data);
+    setSignupError("");
+    createUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        toast("User created Succesfully");
+        const userInfo = {
+          displayName: data.name,
+        };
+        updateUser(userInfo)
+          .then((result) => {})
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+        setSignupError(error.message);
+      });
   };
   return (
     <div className="h-[800px] flex justify-center items-center">
@@ -64,7 +87,8 @@ const Signup = () => {
                 },
                 pattern: {
                   value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
-                  message: "Password must be strong",
+                  message:
+                    "Password must have upper Case number and special carracter",
                 },
               })}
               className="input input-bordered w-full max-w-xs"
@@ -78,6 +102,7 @@ const Signup = () => {
             value="Sign up"
             type="submit"
           />
+          {signupError && <p className="text-red-600 my-3">{signupError}</p>}
         </form>
         <p>
           Already ahve an account{" "}
