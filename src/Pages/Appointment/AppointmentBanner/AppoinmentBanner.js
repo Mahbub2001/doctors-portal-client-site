@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import chair from '../../../assets/images/chair.png'
-import { DayPicker } from 'react-day-picker';
-const AppoinmentBanner = ({selectedDate,setSelectedDate}) => {
-    
+import chair from "../../../assets/images/chair.png";
+import { DayPicker } from "react-day-picker";
+const AppoinmentBanner = ({ selectedDate, setSelectedDate }) => {
   return (
     <header className="my-6">
       <div className="hero">
@@ -14,9 +13,13 @@ const AppoinmentBanner = ({selectedDate,setSelectedDate}) => {
           />
           <div>
             <DayPicker
-            mode="single"
-            selected={selectedDate}
-            onSelect={setSelectedDate}
+              mode="single"
+              selected={selectedDate}
+              onSelect={(data) => {
+                if (data) {
+                  setSelectedDate(data);
+                }
+              }}
             />
           </div>
         </div>
