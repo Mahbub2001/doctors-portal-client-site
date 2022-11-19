@@ -10,10 +10,10 @@ const MyAppointment = () => {
   const { data: bookings = [] } = useQuery({
     queryKey: ["bookings", user.email],
     queryFn: async () => {
-      const res = await fetch(url,{
-        headers:{
-          authorization:`bearer ${localStorage.getItem('accessToken')}`
-        }
+      const res = await fetch(url, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
       });
       const data = await res.json();
       return data;
@@ -36,15 +36,16 @@ const MyAppointment = () => {
             </tr>
           </thead>
           <tbody>
-            {bookings.map((booking, index) => (
-              <tr key={booking._id}>
-                <th>{index + 1}</th>
-                <td>{booking.patient}</td>
-                <td>{booking.treatment}</td>
-                <td>{booking.appointmentDate}</td>
-                <td>{booking.slot}</td>
-              </tr>
-            ))}
+            {bookings &&
+              bookings?.map((booking, index) => (
+                <tr key={booking._id}>
+                  <th>{index + 1}</th>
+                  <td>{booking.patient}</td>
+                  <td>{booking.treatment}</td>
+                  <td>{booking.appointmentDate}</td>
+                  <td>{booking.slot}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
